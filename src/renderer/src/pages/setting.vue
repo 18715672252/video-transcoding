@@ -55,7 +55,8 @@ const [newValSize, addVideoSize, delSize] = useAddVideoSize('size')
 const [newValFrame, addVideoFrame, delFrame] = useAddVideoSize('frame')
 const selDir = async () => {
   const res = await window.api.selDir()
-  setSaveDir(res.filePaths[0])
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setSaveDir((res as any).filePaths[0])
 }
 </script>
 

@@ -13,7 +13,7 @@
 import { CloseOne } from '@icon-park/vue-next'
 import { defineProps } from 'vue'
 import useCounterStore from '../store'
-import { ElMessage } from 'element-plus';
+import { ElMessage } from 'element-plus'
 const { name, path, progress, status } = defineProps<{
   name: string
   path: string

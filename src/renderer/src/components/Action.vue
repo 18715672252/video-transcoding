@@ -24,16 +24,21 @@ import { Plus, OneThirdRotation } from '@icon-park/vue-next'
 import { ElMessage } from 'element-plus'
 import useCounterStore from '../store'
 import { storeToRefs } from 'pinia'
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid'
 const { frame, size } = storeToRefs(useCounterStore())
-const { addFile, saveDir, files, setVideoProgress } = useCounterStore()
+const { addFile, saveDir, files, setVideoProgress, setVideoStatus } = useCounterStore()
 import { VideoStatus } from '../types'
 const aa = () => {
   if (!files.length) {
     ElMessage.error('请添加视频文件')
     return
   }
+  if (!saveDir) {
+    ElMessage.error('请在设置页面设置保存路径')
+    return
+  }
   window.api.progressNotice(setVideoProgress)
+  window.api.errorNotice(setVideoStatus)
   files.forEach((item) => {
     const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-${item.name}`
     window.api.compress({

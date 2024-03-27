@@ -12,6 +12,8 @@ export type VideoStatusType = 'white' | '#f9f871' | '#ff6f91' | '#4ffbdf'
 
 export type func = (progress: number | string, id: string | number) => void
 
+export type funcError = (id: string | number) => void
+
 // const bgColor = computed(() => ({
 //   [VideoStatus.COMPRESS]: '#f9f871',
 //   [VideoStatus.ERROR]: '#ff6f91',
