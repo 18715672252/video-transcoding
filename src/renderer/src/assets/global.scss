@@ -6,6 +6,10 @@ body {
   // filter: grayscale(1);
 }
 
+.el-message__content {
+  font-size: 12px !important;
+}
+
 // 允许鼠标在某个元素按下时，可以拖动应用
 .drag {
   -webkit-app-region: drag;
