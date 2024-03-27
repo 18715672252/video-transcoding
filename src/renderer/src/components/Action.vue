@@ -12,8 +12,17 @@
           <plus theme="outline" size="42" fill="#333" />
         </el-upload>
       </div>
-      <div class="button cursor-pointer" @click="aa">
-        <one-third-rotation theme="outline" size="42" fill="#333" />
+      <div
+        class="button cursor-pointer"
+        :class="{ transcodingPogress: transcodingPogress }"
+        @click="aa"
+      >
+        <one-third-rotation
+          theme="outline"
+          :class="{ 'animate-spin': transcodingPogress }"
+          size="42"
+          fill="#333"
+        />
       </div>
     </section>
   </main>
@@ -25,7 +34,7 @@ import { ElMessage } from 'element-plus'
 import useCounterStore from '../store'
 import { storeToRefs } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
-const { frame, size } = storeToRefs(useCounterStore())
+const { frame, size, transcodingPogress } = storeToRefs(useCounterStore())
 const { addFile, saveDir, files, setVideoProgress, setVideoStatus } = useCounterStore()
 import { VideoStatus } from '../types'
 const aa = () => {
@@ -39,7 +48,14 @@ const aa = () => {
   }
   window.api.progressNotice(setVideoProgress)
   window.api.errorNotice(setVideoStatus)
-  files.forEach((item) => {
+  console.log(files)
+  const filesSurplus = files.filter((item) => item.status === 'white')
+  console.log(filesSurplus)
+  if (!filesSurplus.length) {
+    ElMessage.error('视频已经全部转码完毕')
+    return
+  }
+  filesSurplus.forEach((item) => {
     const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-${item.name}`
     window.api.compress({
       file: item.path,
@@ -59,11 +75,15 @@ const addFileCom = (options) => {
     return
   }
   const id = uuidv4()
-  addFile({ path, name, progress: 0, status: VideoStatus.COMPRESS, id })
+  addFile({ path, name, progress: 0, status: VideoStatus.READY, id })
 }
 </script>
 
 <style lang="scss" scoped>
+.transcodingPogress {
+  // cursor: not-allowed !important;
+  pointer-events: none;
+}
 .button {
   @apply w-20 h-20 rounded-lg bg-white flex justify-center items-center text-slate-600;
   .uploader {

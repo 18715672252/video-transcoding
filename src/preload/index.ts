@@ -16,7 +16,12 @@ const api = {
     })
   },
   errorNotice: (cb: funcError) => {
-    ipcRenderer.on('progress', (_ev: IpcRendererEvent, data) => {
+    ipcRenderer.on('error', (_ev: IpcRendererEvent, data) => {
+      cb(data.id)
+    })
+  },
+  endNotice: (cb: funcError) => {
+    ipcRenderer.on('end', (_ev: IpcRendererEvent, data) => {
       cb(data.id)
     })
   }

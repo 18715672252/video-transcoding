@@ -36,7 +36,7 @@ export default class Ffmpeg {
     this.window.webContents.send('error', error)
   }
   end = () => {
-    console.log('Processing finished !')
+    this.window.webContents.send('end', this.id)
   }
   run() {
     this.ffmpeg

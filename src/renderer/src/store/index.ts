@@ -14,6 +14,7 @@ type obj = {
   frame: framesType
   files: Array<fileType>
   saveDir: string
+  // transcodingPogress: boolean
 }
 const useCounterStore = defineStore('config', {
   state: (): obj => ({
@@ -22,8 +23,19 @@ const useCounterStore = defineStore('config', {
     frames: ['60', '30', '24'],
     frame: '60',
     files: [],
-    saveDir: 'C:/Users/Admin/Desktop/ag'
+    saveDir: 'C:/Users/Admin/Desktop/ag',
+    // transcodingPogress: false
   }),
+  getters: {
+    transcodingPogress: (state: obj) => {
+      let flag = false
+      state.files.forEach((item: fileType) => {
+        flag = flag || item.status === '#f9f871'
+      })
+      console.log(flag, 'flag')
+      return flag
+    }
+  },
   actions: {
     addSize(payload: string) {
       this.sizes.push(payload)
@@ -56,6 +68,7 @@ const useCounterStore = defineStore('config', {
         progress = 100
       }
       this.files[idx].progress = progress
+      this.files[idx].status = VideoStatus.COMPRESS
       if (progress === 100) {
         this.files[idx].status = VideoStatus.FINSH
       }
