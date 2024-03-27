@@ -12,7 +12,7 @@
           <plus theme="outline" size="42" fill="#333" />
         </el-upload>
       </div>
-      <div class="button" @click="aa">
+      <div class="button cursor-pointer" @click="aa">
         <one-third-rotation theme="outline" size="42" fill="#333" />
       </div>
     </section>
@@ -26,11 +26,14 @@ import useCounterStore from '../store'
 import { storeToRefs } from 'pinia'
 const { frame, size } = storeToRefs(useCounterStore())
 const { addFile, saveDir, files } = useCounterStore()
+import { VideoStatus } from '../types'
 const aa = () => {
+  if (!files.length) {
+    ElMessage.error('请添加视频文件')
+    return
+  }
   files.forEach((item) => {
-    const videoName =
-      new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('') +
-      item.name
+    const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-${item.name}`
     window.api.compress({
       file: item.path,
       fps: +frame.value,
@@ -47,7 +50,7 @@ const addFileCom = (options) => {
     ElMessage.error('视频已经存在')
     return
   }
-  addFile({ path, name, progress: 65 })
+  addFile({ path, name, progress: 65, status: VideoStatus.FINSH })
 }
 </script>
 
