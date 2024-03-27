@@ -38,6 +38,7 @@ const delVideoCom = () => {
     @apply absolute top-0 bottom-0 left-0 right-0 z-0 overflow-hidden;
     width: var(--process);
     background-color: var(--status);
+    border-radius: 0.5rem;
   }
   .title {
     @apply truncate;

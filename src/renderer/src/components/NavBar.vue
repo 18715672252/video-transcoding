@@ -4,13 +4,18 @@
     <section class="flex justify-between gap-2">
       <div class="nodrag cursor-pointer">换肤</div>
       <div>
-        <router-link to="/" class="nodrag">转码</router-link>
+        <router-link active-class="active-router" to="/" class="nodrag">转码</router-link>
       </div>
       <div>
-        <router-link to="/setting" class="nodrag">配置</router-link>
+        <router-link active-class="active-router" to="/setting" class="nodrag">配置</router-link>
       </div>
     </section>
   </main>
 </template>
 <script setup lang="ts"></script>
-<style scoped></style>
+<style scoped lang="scss">
+.active-router {
+  color: #409eff;
+}
+
+</style>

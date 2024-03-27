@@ -13,7 +13,7 @@
         </el-option>
       </el-select>
       <div class="flex gap-1 mt-2 items-center">
-        <el-input v-model="newValSize" clearable />
+        <el-input v-model="newValSize" clearable placeholder="请输入1920x1080格式" />
         <el-button type="primary" @click="addVideoSize">添加</el-button>
       </div>
     </section>
@@ -30,7 +30,7 @@
         </el-option>
       </el-select>
       <div class="flex gap-1 mt-2 items-center">
-        <el-input v-model="newValFrame" clearable />
+        <el-input v-model="newValFrame" clearable placeholder="请输入数字" />
         <el-button type="success" @click="addVideoFrame">添加</el-button>
       </div>
     </section>
