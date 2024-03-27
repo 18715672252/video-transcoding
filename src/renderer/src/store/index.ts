@@ -65,7 +65,6 @@ const useCounterStore = defineStore('config', {
       this.files[idx].status = VideoStatus.ERROR
     },
     setSaveDir(payload: string) {
-      console.log(payload, 'payload')
       this.saveDir = payload
     }
   }
