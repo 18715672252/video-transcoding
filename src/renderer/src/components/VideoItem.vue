@@ -1,5 +1,5 @@
 <template>
-  <section class="video" :style="`--process: ${progress}%`">
+  <section class="video" :style="`--process: ${progress}%; --status:${status}`">
     <div class="title z-10">
       {{ name }}
     </div>
@@ -13,7 +13,12 @@
 import { CloseOne } from '@icon-park/vue-next'
 import { defineProps } from 'vue'
 import useCounterStore from '../store'
-const { name, path, progress } = defineProps<{ name: string; path: string; progress: number }>()
+const { name, path, progress, status } = defineProps<{
+  name: string
+  path: string
+  progress: number
+  status: string
+}>()
 const { delVideo } = useCounterStore()
 const delVideoCom = () => {
   delVideo({ name, path })
@@ -25,8 +30,9 @@ const delVideoCom = () => {
   @apply bg-white px-4 py-[8px] rounded-lg mb-2 mx-3 text-xs text-slate-600 flex justify-between items-center relative;
   &::before {
     content: '';
-    @apply bg-green-100 absolute top-0 bottom-0 left-0 right-0 z-0 overflow-hidden;
+    @apply absolute top-0 bottom-0 left-0 right-0 z-0 overflow-hidden;
     width: var(--process);
+    background-color: var(--status);
   }
   .title {
     @apply truncate;

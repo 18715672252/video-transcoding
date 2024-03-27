@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
-type sizesType = '1920x1080' | '1024x720'
-type framesType = '60' | '30' | '24'
+import { VideoStatusType, sizesType, framesType } from '../types'
 export type fileType = {
   name: string
   path: string
   progress: number
+  status: VideoStatusType
 }
 type obj = {
   sizes: Array<string>
@@ -42,7 +42,7 @@ const useCounterStore = defineStore('config', {
       console.log(option)
       this.files.push(option)
     },
-    delVideo(option: fileType) {
+    delVideo(option: Pick<fileType, 'name' | 'path'>) {
       const idx = this.files.findIndex((item: fileType) => {
         return item.name === option.name && item.path === option.path
       })
