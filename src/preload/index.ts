@@ -1,6 +1,7 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { IpcRendererEvent, contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { CompressOptions } from '../main/ffmpeg'
+import { func } from '../renderer/src/types'
 // Custom APIs for renderer
 const api = {
   compress: (option: CompressOptions) => {
@@ -8,6 +9,11 @@ const api = {
   },
   selDir: async () => {
     return ipcRenderer.invoke('selDir')
+  },
+  progressNotice: (cb: func) => {
+    ipcRenderer.on('progress', (_ev: IpcRendererEvent, data) => {
+      cb(data.progress, data.id)
+    })
   }
 }
 

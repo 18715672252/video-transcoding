@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
-import { VideoStatusType, sizesType, framesType } from '../types'
+import { VideoStatusType, sizesType, framesType, VideoStatus } from '../types'
 export type fileType = {
   name: string
   path: string
-  progress: number
+  progress: number | string
   status: VideoStatusType
+  id: string | number
 }
 type obj = {
   sizes: Array<string>
@@ -47,6 +48,21 @@ const useCounterStore = defineStore('config', {
         return item.name === option.name && item.path === option.path
       })
       this.files.splice(idx, 1)
+    },
+    setVideoProgress(progress: number | string, id: string | number) {
+      const idx = this.files.findIndex((item) => item.id === id)
+      console.log(progress, 'progress')
+      if (+progress > 99.8) {
+        progress = 100
+      }
+      this.files[idx].progress = progress
+      if (progress === 100) {
+        this.files[idx].status = VideoStatus.FINSH
+      }
+    },
+    setVideoStatus(id: string | number) {
+      const idx = this.files.findIndex((item) => item.id === id)
+      this.files[idx].status = VideoStatus.ERROR
     },
     setSaveDir(payload: string) {
       console.log(payload, 'payload')

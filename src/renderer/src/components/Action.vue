@@ -24,14 +24,16 @@ import { Plus, OneThirdRotation } from '@icon-park/vue-next'
 import { ElMessage } from 'element-plus'
 import useCounterStore from '../store'
 import { storeToRefs } from 'pinia'
+import { v4 as uuidv4 } from 'uuid';
 const { frame, size } = storeToRefs(useCounterStore())
-const { addFile, saveDir, files } = useCounterStore()
+const { addFile, saveDir, files, setVideoProgress } = useCounterStore()
 import { VideoStatus } from '../types'
 const aa = () => {
   if (!files.length) {
     ElMessage.error('请添加视频文件')
     return
   }
+  window.api.progressNotice(setVideoProgress)
   files.forEach((item) => {
     const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-${item.name}`
     window.api.compress({
@@ -39,7 +41,8 @@ const aa = () => {
       fps: +frame.value,
       size: size.value,
       dir: saveDir,
-      name: videoName
+      name: videoName,
+      id: item.id
     })
   })
 }
@@ -50,7 +53,8 @@ const addFileCom = (options) => {
     ElMessage.error('视频已经存在')
     return
   }
-  addFile({ path, name, progress: 65, status: VideoStatus.FINSH })
+  const id = uuidv4()
+  addFile({ path, name, progress: 0, status: VideoStatus.COMPRESS, id })
 }
 </script>
 

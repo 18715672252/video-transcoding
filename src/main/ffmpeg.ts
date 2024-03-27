@@ -1,4 +1,4 @@
-import { IpcMainInvokeEvent } from 'electron'
+import { IpcMainInvokeEvent, ipcMain, BrowserWindow } from 'electron'
 import ffmpegPath from '@ffmpeg-installer/ffmpeg'
 import ffprobePath from '@ffprobe-installer/ffprobe'
 import ffmpeg from 'fluent-ffmpeg'
@@ -10,17 +10,27 @@ export type CompressOptions = {
   fps: number
   size: string
   dir: string
-  name: string
+  name: string,
+  id: string | number
 }
 export default class Ffmpeg {
   ffmpeg: ffmpeg.FfmpegCommand
+  window: BrowserWindow
   constructor(
     private _ev: IpcMainInvokeEvent,
-    private option: CompressOptions
+    private option: CompressOptions,
+    private id: string | number
   ) {
     this.ffmpeg = ffmpeg(this.option.file)
+    this.window = BrowserWindow.fromWebContents(this._ev.sender)!
+    this.id = option.id
   }
   progressEvent = (progress) => {
+    const obj = {
+      progress: progress.percent,
+      id: this.id
+    }
+    this.window.webContents.send('progress', obj)
     console.log(progress + '%%%%%')
   }
   error = (error) => {

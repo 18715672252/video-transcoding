@@ -13,6 +13,7 @@
 import { CloseOne } from '@icon-park/vue-next'
 import { defineProps } from 'vue'
 import useCounterStore from '../store'
+import { ElMessage } from 'element-plus';
 const { name, path, progress, status } = defineProps<{
   name: string
   path: string
@@ -21,6 +22,10 @@ const { name, path, progress, status } = defineProps<{
 }>()
 const { delVideo } = useCounterStore()
 const delVideoCom = () => {
+  if (status === '#f9f871') {
+    ElMessage('视频正在转码无法删除')
+    return
+  }
   delVideo({ name, path })
 }
 </script>
