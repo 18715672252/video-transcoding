@@ -4,7 +4,7 @@ import { ref } from 'vue'
 
 export default (type: 'size' | 'frame') => {
   const newVal = ref('')
-  const { addSize, addFrame } = useCounterStore()
+  const { addSize, addFrame, delSize, delFrame } = useCounterStore()
   const addVideoSize = async () => {
     await addSize(newVal.value)
     newVal.value = ''
@@ -21,9 +21,10 @@ export default (type: 'size' | 'frame') => {
       type: 'success'
     })
   }
+
   if (type === 'size') {
-    return [newVal, addVideoSize]
+    return [newVal, addVideoSize, delSize]
   } else {
-    return [newVal, addVideoFrame]
+    return [newVal, addVideoFrame, delFrame]
   }
 }

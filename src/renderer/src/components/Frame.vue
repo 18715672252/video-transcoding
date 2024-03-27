@@ -21,7 +21,8 @@
 
 <script setup lang="ts">
 import useCounterStore from '../store'
-const { frames, frame, sizes, size } = useCounterStore()
+import { storeToRefs } from 'pinia'
+const { frames, frame, sizes, size } = storeToRefs(useCounterStore())
 </script>
 
 <style scoped>

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import NavBar from './components/NavBar.vue'
 import CopyRight from './components/CopyRight.vue'
-
 </script>
 
 <template>

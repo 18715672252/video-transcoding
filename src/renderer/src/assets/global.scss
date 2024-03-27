@@ -1,3 +1,12 @@
 body {
   @apply bg-slate-50;
 }
+
+// 允许鼠标在某个元素按下时，可以拖动应用
+.drag {
+  -webkit-app-region: drag;
+}
+// 禁止拖动，electron特有
+.nodrag, input, select, textarea, option {
+  -webkit-app-region: no-drag;
+}
