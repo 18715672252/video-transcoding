@@ -1,6 +1,6 @@
 <template>
   <main class="overflow-y-auto h-80">
-    <video-item v-for="item in files" :key="item.id" v-bind="item" />
+    <video-item v-for="item in files" :key="JSON.stringify(item)" v-bind="item" />
   </main>
 </template>
 

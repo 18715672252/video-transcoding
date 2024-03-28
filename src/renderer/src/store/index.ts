@@ -42,9 +42,9 @@ const useCounterStore = defineStore('config', {
     addFrame(payload: string) {
       this.frames.push(payload)
     },
-    delSize(index: number) {
-      if (!this.sizes[index]) return
-      this.sizes.splice(index, 1)
+    delSize(index: unknown) {
+      if (!this.sizes[index as number]) return
+      this.sizes.splice(index as number, 1)
     },
     delFrame(index: number) {
       if (!this.frames[index]) return
@@ -78,7 +78,7 @@ const useCounterStore = defineStore('config', {
     setSaveDir(payload: string) {
       this.saveDir = payload
     },
-    delVideoNew(isDelAll: boolean, id?: string) {
+    delVideoNew(isDelAll: boolean, id?: string | number) {
       // 删除视频
       if (isDelAll) {
         // this.files = [] // z直接赋值无法删除,后续要看看为什么

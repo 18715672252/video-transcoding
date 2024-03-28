@@ -51,8 +51,8 @@ import { CloseOne } from '@icon-park/vue-next'
 import { storeToRefs } from 'pinia'
 const { frames, sizes, size, saveDir, frame } = storeToRefs(useCounterStore())
 const { setSaveDir } = useCounterStore()
-const [newValSize, addVideoSize, delSize] = useAddVideoSize('size')
-const [newValFrame, addVideoFrame, delFrame] = useAddVideoSize('frame')
+const { newVal: newValSize, addVideoSize, delSize } = useAddVideoSize()
+const { newVal: newValFrame, addVideoFrame, delFrame } = useAddVideoSize()
 const selDir = async () => {
   const res = await window.api.selDir()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

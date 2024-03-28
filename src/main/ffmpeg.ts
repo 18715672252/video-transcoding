@@ -10,7 +10,7 @@ export type CompressOptions = {
   fps: number
   size: string
   dir: string
-  name: string,
+  name: string
   id: string | number
 }
 export default class Ffmpeg {

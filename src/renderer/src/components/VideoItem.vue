@@ -17,9 +17,9 @@ import { ElMessage } from 'element-plus'
 const props = defineProps<{
   name: string
   path: string
-  progress: number
+  progress: number | string
   status: string
-  id: string
+  id: string | number
 }>()
 const { name, path, progress, status, id } = toRefs(props)
 const { delVideoNew } = useCounterStore()

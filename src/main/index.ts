@@ -1,7 +1,6 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
-import icon from '../../resources/icon.png?asset'
 import './icp'
 function createWindow(): void {
   // Create the browser window.
@@ -11,10 +10,10 @@ function createWindow(): void {
     show: false,
     x: 0,
     y: 0,
+    icon: '../.../build/icon.png',
     frame: false, // 去除最上面title标题，导航，应用将无法拖动（需要另行配置见global.css）
     resizable: false, // 禁止应用缩放
     alwaysOnTop: true, // 层级最高
-    ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false
