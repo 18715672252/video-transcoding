@@ -32,7 +32,6 @@ const useCounterStore = defineStore('config', {
       state.files.forEach((item: fileType) => {
         flag = flag || item.status === '#f9f871'
       })
-      console.log(flag, 'flag')
       return flag
     }
   },
@@ -63,7 +62,6 @@ const useCounterStore = defineStore('config', {
     },
     setVideoProgress(progress: number | string, id: string | number) {
       const idx = this.files.findIndex((item) => item.id === id)
-      console.log(progress, 'progress')
       if (+progress > 99.8) {
         progress = 100
       }
@@ -79,6 +77,19 @@ const useCounterStore = defineStore('config', {
     },
     setSaveDir(payload: string) {
       this.saveDir = payload
+    },
+    delVideoNew(isDelAll: boolean, id?: string) {
+      // 删除视频
+      if (isDelAll) {
+        // this.files = [] // z直接赋值无法删除,后续要看看为什么
+        while (this.files.length) {
+          this.files.splice(0, 1)
+        }
+      }
+      if (!isDelAll && id) {
+        const idx = this.files.findIndex((item) => item.id === id)
+        this.files.splice(idx, 1)
+      }
     }
   }
 })
