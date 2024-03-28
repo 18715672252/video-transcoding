@@ -3,7 +3,7 @@
     <div class="title z-10">
       {{ name }}
     </div>
-    <div class="icon" @click="delVideoCom">
+    <div class="icon" @click="() => delVideoCom()">
       <close-one theme="outline" size="12" fill="#333"></close-one>
     </div>
   </section>
@@ -11,22 +11,25 @@
 
 <script setup lang="ts">
 import { CloseOne } from '@icon-park/vue-next'
-import { defineProps } from 'vue'
+import { defineProps, toRefs } from 'vue'
 import useCounterStore from '../store'
 import { ElMessage } from 'element-plus'
-const { name, path, progress, status } = defineProps<{
+const props = defineProps<{
   name: string
   path: string
   progress: number
-  status: string
+  status: string,
+  id: string
 }>()
-const { delVideo } = useCounterStore()
+const { name, path, progress, status, id } = toRefs(props)
+const { delVideoNew } = useCounterStore()
 const delVideoCom = () => {
-  if (status === '#f9f871') {
+  console.log(name.value, path.value)
+  if (status.value === '#f9f871') {
     ElMessage('视频正在转码无法删除')
     return
   }
-  delVideo({ name, path })
+  delVideoNew(false, id.value)
 }
 </script>
 
