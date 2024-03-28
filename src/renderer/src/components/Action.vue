@@ -12,14 +12,10 @@
           <plus theme="outline" size="42" fill="#333" />
         </el-upload>
       </div>
-      <div
-        class="button cursor-pointer"
-        :class="{ transcodingPogress: transcodingPogress }"
-        @click="aa"
-      >
+      <div class="button cursor-pointer" @click="aa">
         <one-third-rotation
           theme="outline"
-          :class="{ 'animate-spin': transcodingPogress }"
+          :class="{ 'animate-spin-yyy': transcodingPogress }"
           size="42"
           fill="#333"
         />
@@ -43,13 +39,17 @@ const aa = () => {
     return
   }
   if (!saveDir) {
-    ElMessage.error('请在设置页面设置保存路径')
+    ElMessage.error('请在配置页面配置保存路径')
+    return
+  }
+  console.log(transcodingPogress)
+  if (transcodingPogress.value) {
+    ElMessage.error('视频正在转码...')
     return
   }
   window.api.progressNotice(setVideoProgress)
   window.api.errorNotice(setVideoStatus)
-  console.log(files)
-  const filesSurplus = files.filter((item) => item.status === 'white')
+  const filesSurplus = files.filter((item) => item.status === 'white' || item.status === '#ff6f91')
   console.log(filesSurplus)
   if (!filesSurplus.length) {
     ElMessage.error('视频已经全部转码完毕')
@@ -80,12 +80,11 @@ const addFileCom = (options) => {
 </script>
 
 <style lang="scss" scoped>
-.transcodingPogress {
-  // cursor: not-allowed !important;
-  pointer-events: none;
-}
 .button {
   @apply w-20 h-20 rounded-lg bg-white flex justify-center items-center text-slate-600;
+  .animate-spin-yyy {
+    @apply animate-spin text-slate-300 cursor-wait;
+  }
   .uploader {
     @apply flex items-center;
   }

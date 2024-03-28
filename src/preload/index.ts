@@ -24,6 +24,9 @@ const api = {
     ipcRenderer.on('end', (_ev: IpcRendererEvent, data) => {
       cb(data.id)
     })
+  },
+  stopNotice() {
+    return ipcRenderer.invoke('stop')
   }
 }
 

@@ -33,10 +33,16 @@ export default class Ffmpeg {
     this.window.webContents.send('progress', obj)
   }
   error = (error) => {
-    this.window.webContents.send('error', error)
+    this.window.webContents.send('error', { ...error, id: this.id })
   }
   end = () => {
     this.window.webContents.send('end', this.id)
+  }
+  stop = () => {
+    this.ffmpeg.kill('SIGKILL')
+  }
+  restart = () => {
+    this.ffmpeg.kill('SIGCONT')
   }
   run() {
     this.ffmpeg

@@ -9,6 +9,7 @@ declare global {
       selDir: () => Promise<unknown>
       progressNotice: (arg: func) => void
       errorNotice: (arg: funcError) => void
+      stopNotice: () => Promise<unknown>
     }
   }
 }
