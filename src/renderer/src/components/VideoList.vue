@@ -5,7 +5,8 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import VideoItem from './VideoItem.vue'
 import useCounterStore from '../store'
-const { files } = useCounterStore()
+const { files } = storeToRefs(useCounterStore())
 </script>
