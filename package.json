@@ -1,7 +1,7 @@
 {
-  "name": "ele-vite",
+  "name": "transcoding",
   "version": "1.0.0",
-  "description": "An Electron application with Vue and TypeScript",
+  "description": "视频转码",
   "main": "./out/main/index.js",
   "author": "example.com",
   "homepage": "https://electron-vite.org",

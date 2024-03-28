@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: ele-vite
+productName: transcoding
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: ele-vite
+  executableName: transcoding
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

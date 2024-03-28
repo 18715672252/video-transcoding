@@ -18,7 +18,7 @@ const props = defineProps<{
   name: string
   path: string
   progress: number
-  status: string,
+  status: string
   id: string
 }>()
 const { name, path, progress, status, id } = toRefs(props)

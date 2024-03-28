@@ -12,7 +12,6 @@ function createWindow(): void {
     x: 0,
     y: 0,
     frame: false, // 去除最上面title标题，导航，应用将无法拖动（需要另行配置见global.css）
-    autoHideMenuBar: true, // 去除默认菜单
     resizable: false, // 禁止应用缩放
     alwaysOnTop: true, // 层级最高
     ...(process.platform === 'linux' ? { icon } : {}),
