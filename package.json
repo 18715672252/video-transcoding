@@ -28,12 +28,16 @@
     "@ffprobe-installer/ffprobe": "^2.1.2",
     "@icon-park/vue": "^1.4.2",
     "@icon-park/vue-next": "^1.4.2",
+    "async": "^3.2.5",
     "electron-updater": "^6.1.7",
     "element-plus": "^2.6.2",
+    "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "isexe": "^3.1.1",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "which": "^4.0.0"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

@@ -1,0 +1,10 @@
+ffmpeg -i 1.mp4 -b:v 1M -r 20 1-1.mp4
+ffmpeg -i 2.mp4 -b:v 1M -r 20 2-1.mp4
+ffmpeg -i 3.mp4 -b:v 1M -r 20 3-1.mp4
+ffmpeg -i 4.mp4 -b:v 1M -r 20 4-1.mp4
+ffmpeg -i 5.mp4 -b:v 1M -r 20 5-1.mp4
+ffmpeg -i 6.mp4 -b:v 1M -r 20 6-1.mp4
+ffmpeg -i 7.mp4 -b:v 1M -r 20 7-1.mp4
+ffmpeg -i 8.mp4 -b:v 1M -r 20 8-1.mp4
+ffmpeg -i 9.mp4 -b:v 1M -r 20 9-1.mp4
+ffmpeg -i 10.mp4 -b:v 1M -r 20 10-1.mp4

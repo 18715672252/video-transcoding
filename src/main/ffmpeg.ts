@@ -1,10 +1,16 @@
 import { IpcMainInvokeEvent, BrowserWindow } from 'electron'
-import ffmpegPath from '@ffmpeg-installer/ffmpeg'
-import ffprobePath from '@ffprobe-installer/ffprobe'
+// import ffmpegPath from '@ffmpeg-installer/ffmpeg'
+// import ffprobePath from '@ffprobe-installer/ffprobe'
 import ffmpeg from 'fluent-ffmpeg'
+import { is } from '@electron-toolkit/utils'
 import path from 'path'
-ffmpeg.setFfmpegPath(ffmpegPath.path)
-ffmpeg.setFfprobePath(ffprobePath.path)
+if (is.dev) {
+  ffmpeg.setFfmpegPath(path.resolve(__dirname, '../../resources/ffmpeg.exe'))
+  ffmpeg.setFfprobePath(path.resolve(__dirname, '../../resources/ffprobe.exe'))
+} else {
+  ffmpeg.setFfmpegPath(process.resourcesPath.replace(/\\/g, '/') + '/app/resources/ffmpeg.exe')
+  ffmpeg.setFfprobePath(process.resourcesPath.replace(/\\/g, '/') + '/app/resources/ffprobe.exe')
+}
 export type CompressOptions = {
   file: string
   fps: number
