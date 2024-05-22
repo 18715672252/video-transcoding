@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import fs from 'fs'
 import './icp'
 function createWindow(): void {
   // Create the browser window.
@@ -71,6 +72,11 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+})
+
+process.on('uncaughtException', (err) => {
+  const path = app.getPath('desktop')
+  fs.writeFileSync(`${path}/11.txt`, JSON.stringify(err))
 })
 
 // In this file you can include the rest of your app"s specific main process
