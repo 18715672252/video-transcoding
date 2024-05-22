@@ -27,6 +27,12 @@ const api = {
   },
   stopNotice() {
     return ipcRenderer.invoke('stop')
+  },
+  minimize() {
+    ipcRenderer.send('minimize')
+  },
+  close() {
+    ipcRenderer.send('close')
   }
 }
 

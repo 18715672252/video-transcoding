@@ -10,6 +10,8 @@ declare global {
       progressNotice: (arg: func) => void
       errorNotice: (arg: funcError) => void
       stopNotice: () => Promise<unknown>
+      close: () => void
+      minimize: () => void
     }
   }
 }

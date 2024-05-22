@@ -3,9 +3,10 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import fs from 'fs'
 import './icp'
+let mainWindow: BrowserWindow | null
 function createWindow(): void {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 350,
     height: 666,
     show: false,
@@ -20,11 +21,13 @@ function createWindow(): void {
       sandbox: false
     }
   })
-
-  mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
+  mainWindow.on('closed', () => {
+    mainWindow = null
   })
-
+  mainWindow.on('ready-to-show', () => {
+    (mainWindow as BrowserWindow).show()
+  })
+  mainWindow.setMaximizable(false)
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
