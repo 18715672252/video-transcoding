@@ -1,4 +1,4 @@
-import { IpcMainInvokeEvent, ipcMain, BrowserWindow, IpcMainEvent } from 'electron'
+import { IpcMainInvokeEvent, ipcMain, BrowserWindow, IpcMainEvent, app } from 'electron'
 import Ffmpeg, { CompressOptions } from './ffmpeg'
 import { selDir } from './settingDir'
 let FfmpegaStack: Array<Ffmpeg> = []
@@ -30,4 +30,8 @@ ipcMain.on('close', (event: IpcMainEvent) => {
 
 ipcMain.on('minimize', (event) => {
   ;(BrowserWindow.fromWebContents(event.sender) as BrowserWindow).minimize()
+})
+
+ipcMain.handle('getDefaultPath', async () => {
+  return app.getPath('desktop')
 })

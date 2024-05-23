@@ -33,6 +33,9 @@ const api = {
   },
   close() {
     ipcRenderer.send('close')
+  },
+  getDefaultPath: async () => {
+    return ipcRenderer.invoke('getDefaultPath')
   }
 }
 

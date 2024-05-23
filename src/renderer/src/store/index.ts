@@ -23,7 +23,7 @@ const useCounterStore = defineStore('config', {
     frames: ['60', '30', '24'],
     frame: '60',
     files: [],
-    saveDir: 'C:/Users/Admin/Desktop/ag',
+    saveDir: '',
     // transcodingPogress: false
   }),
   getters: {

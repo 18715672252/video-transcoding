@@ -14,6 +14,8 @@ export type func = (progress: number | string, id: string | number) => void
 
 export type funcError = (id: string | number) => void
 
+export type getDefaultPathFunc = (path: string) => string
+
 // const bgColor = computed(() => ({
 //   [VideoStatus.COMPRESS]: '#f9f871',
 //   [VideoStatus.ERROR]: '#ff6f91',

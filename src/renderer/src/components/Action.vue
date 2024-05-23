@@ -30,8 +30,8 @@ import { ElMessage } from 'element-plus'
 import useCounterStore from '../store'
 import { storeToRefs } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
-const { frame, size, transcodingPogress } = storeToRefs(useCounterStore())
-const { addFile, saveDir, files, setVideoProgress, setVideoStatus } = useCounterStore()
+const { frame, size, transcodingPogress, saveDir } = storeToRefs(useCounterStore())
+const { addFile, files, setVideoProgress, setVideoStatus } = useCounterStore()
 import { VideoStatus } from '../types'
 const aa = () => {
   if (!files.length) {
@@ -42,7 +42,6 @@ const aa = () => {
     ElMessage.error('请在配置页面配置保存路径')
     return
   }
-  console.log(transcodingPogress)
   if (transcodingPogress.value) {
     ElMessage.error('视频正在转码...')
     return
@@ -56,12 +55,12 @@ const aa = () => {
     return
   }
   filesSurplus.forEach((item) => {
-    const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-${item.name}`
+    const videoName = `${new Date().toLocaleString().split(' ').join('').split('/').join('').split(':').join('')}-${size.value}-${frame.value}-.${item.name.split('.').slice(-1)}`
     window.api.compress({
       file: item.path,
       fps: +frame.value,
       size: size.value,
-      dir: saveDir,
+      dir: saveDir.value,
       name: videoName,
       id: item.id
     })

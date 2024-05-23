@@ -12,6 +12,7 @@ declare global {
       stopNotice: () => Promise<unknown>
       close: () => void
       minimize: () => void
+      getDefaultPath: () => Promise<unknown>
     }
   }
 }
